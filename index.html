@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maroju Karthik | Software Engineer</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+body { font-family: 'Inter', system-ui, sans-serif; }
+.glass { background: rgba(30,30,30,0.75); backdrop-filter: blur(16px); }
+.tab-active { color:#facc15; border-bottom:3px solid #facc15; }
+.project-card { transition: all 0.4s ease; }
+.project-card:hover { transform: translateY(-10px) scale(1.02); box-shadow:0 25px 50px -12px rgb(250 204 21 / 0.25); }
+</style>
+</head>
+
+<body class="bg-[#121212] text-white overflow-hidden">
+
+<div class="flex h-screen">
+
+<!-- SIDEBAR -->
+<aside id="sidebar" class="w-72 bg-[#1e1e1e] flex flex-col border-r border-gray-800 md:static fixed h-full z-50 transition-transform duration-300 -translate-x-full md:translate-x-0">
+
+<div class="p-8 border-b border-gray-700 text-center">
+
+<img src="https://drive.google.com/file/d/18HIP7Kn55Io6S3MYVCqNeqFbAELCq1dz/view?usp=drivesdk"
+class="w-28 h-28 mx-auto rounded-3xl border-4 border-yellow-400 shadow-2xl">
+
+<h1 class="mt-6 text-2xl font-semibold">Maroju Karthik</h1>
+<p class="text-yellow-400">Software Engineer | AI & ML</p>
+<p class="text-xs text-gray-400 mt-1">B.Tech CSE (AI/ML) • 2023-2026</p>
+
+</div>
+
+<div class="flex-1 p-8 overflow-y-auto space-y-8">
+
+<div>
+<p class="uppercase text-xs text-gray-400 mb-4">Contact</p>
+<p class="text-sm">karthikmaroju479@gmail.com</p>
+<p class="text-sm mt-2">+91 9666387322</p>
+<p class="text-sm mt-2">Vizianagaram, Andhra Pradesh</p>
+</div>
+
+<div>
+<p class="uppercase text-xs text-gray-400 mb-4">Connect</p>
+<div class="flex gap-4">
+<a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="text-2xl hover:text-yellow-400"><i class="fa-brands fa-github"></i></a>
+<a href="https://linkedin.com/in/karthik-maroju" target="_blank" class="text-2xl hover:text-yellow-400"><i class="fa-brands fa-linkedin"></i></a>
+</div>
+</div>
+
+<div>
+<a href="https://drive.google.com/file/d/1e1BwtHXHQRvz1jJs0ArCIXojM4gLfbpG/view?usp=drivesdk" download
+class="w-full bg-yellow-400 text-black font-semibold py-3 rounded-2xl flex items-center justify-center gap-2">
+<i class="fa-solid fa-download"></i> Download Resume
+</a>
+</div>
+
+</div>
+
+<div class="p-6 text-center text-xs text-gray-500 border-t border-gray-800">
+© 2026 Maroju Karthik
+</div>
+
+</aside>
+
+<!-- MAIN -->
+<div class="flex-1 flex flex-col">
+
+<header class="h-16 bg-[#1e1e1e] border-b border-gray-800 px-6 flex items-center justify-between">
+
+<button id="mobile-menu-btn" class="md:hidden text-2xl">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<nav class="flex gap-8 text-sm">
+<a data-tab="about" class="tab tab-active cursor-pointer">About</a>
+<a data-tab="resume" class="tab cursor-pointer">Resume</a>
+<a data-tab="portfolio" class="tab cursor-pointer">Portfolio</a>
+<a data-tab="contact" class="tab cursor-pointer">Contact</a>
+</nav>
+
+</header>
+
+<main class="flex-1 overflow-auto p-10">
+
+<!-- ABOUT -->
+<div id="about-section" class="section">
+<h1 class="text-4xl font-bold mb-6">About Me</h1>
+<p class="text-gray-300 text-lg leading-relaxed">
+I am a passionate AI & ML focused Software Engineer currently pursuing B.Tech in CSE (AI/ML).
+I have completed multiple internships including AIMER, CodSoft, SmartBridge, Growfinix and AICTE EduSkills.
+I specialize in Python, Machine Learning basics, YOLO Object Detection, and building AI-powered applications.
+</p>
+</div>
+
+<!-- RESUME -->
+<div id="resume-section" class="section hidden">
+<h1 class="text-4xl font-bold mb-10">Education</h1>
+
+<p class="text-yellow-400">2023 – 2026</p>
+<p>B.Tech CSE (AI/ML) – Avanthi Institute of Engineering & Technology</p>
+<p class="mb-6 text-gray-400">CGPA: 7.5</p>
+
+<p class="text-yellow-400">2019 – 2022</p>
+<p>Diploma in Electrical & Electronics Engineering – GBR Govt Polytechnic</p>
+<p class="text-gray-400">CGPA: 7.2</p>
+
+<h2 class="text-3xl font-semibold mt-10 mb-6">Skills</h2>
+<ul class="list-disc list-inside text-gray-300 space-y-2">
+<li>Python</li>
+<li>HTML</li>
+<li>Basics of C</li>
+<li>Machine Learning Fundamentals</li>
+<li>YOLOv5 Object Detection</li>
+<li>Generative AI</li>
+</ul>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio-section" class="section hidden">
+<h1 class="text-4xl font-bold mb-10">Projects</h1>
+
+<ul class="space-y-6">
+<li>
+<h3 class="text-xl font-semibold">Object Detection with YOLOv5</h3>
+<p class="text-gray-400">Used Roboflow with pretrained YOLOv5 model for object detection.</p>
+</li>
+
+<li>
+<h3 class="text-xl font-semibold">Telegram AI ChatBot</h3>
+<p class="text-gray-400">Built using Gemini API to answer questions and interact conversationally.</p>
+</li>
+
+<li>
+<h3 class="text-xl font-semibold">Visual Question Answering Model</h3>
+<p class="text-gray-400">AI model that answers questions based on images.</p>
+</li>
+
+</ul>
+</div>
+
+<!-- CONTACT -->
+<div id="contact-section" class="section hidden">
+<h1 class="text-4xl font-bold mb-8">Contact Me</h1>
+
+<form class="space-y-6">
+<input type="text" placeholder="Your Name" class="w-full p-3 bg-[#1e1e1e] rounded">
+<input type="email" placeholder="Your Email" class="w-full p-3 bg-[#1e1e1e] rounded">
+<textarea placeholder="Your Message" class="w-full p-3 bg-[#1e1e1e] rounded h-32"></textarea>
+<button class="bg-yellow-400 text-black px-6 py-3 rounded font-semibold">Send Message</button>
+</form>
+
+</div>
+
+</main>
+</div>
+</div>
+
+<script>
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab=>{
+tab.addEventListener('click',()=>{
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('tab-active'));
+tab.classList.add('tab-active');
+
+document.querySelectorAll('.section').forEach(sec=>sec.classList.add('hidden'));
+document.getElementById(tab.getAttribute('data-tab')+'-section').classList.remove('hidden');
+});
+});
+
+// Mobile sidebar
+const mobileBtn=document.getElementById('mobile-menu-btn');
+const sidebar=document.getElementById('sidebar');
+mobileBtn.addEventListener('click',()=>{
+sidebar.classList.toggle('-translate-x-full');
+});
+
+</script>
+
+</body>
+</html>
