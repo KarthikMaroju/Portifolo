@@ -1,176 +1,987 @@
-H<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maroju Karthik | Software Engineer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maroju Karthik | Software Engineer | AI & ML Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+            transition: background 0.4s, color 0.4s;
+        }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-body { font-family: 'Inter', system-ui, sans-serif; }
-.glass { background: rgba(30,30,30,0.75); backdrop-filter: blur(16px); }
-.tab-active { color:#facc15; border-bottom:3px solid #facc15; }
-.social-icon {
-width:45px;
-height:45px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#27272a;
-border-radius:14px;
-font-size:20px;
-transition:0.3s ease;
-}
-.social-icon:hover {
-background:#facc15;
-color:black;
-transform:translateY(-4px);
-}
-</style>
+        .light {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* Smooth animations */
+        .section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #020617;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .light header {
+            background: #f1f5f9;
+            color: #020617;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #38bdf8;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -270px;
+            top: 0;
+            width: 270px;
+            height: 100%;
+            background: #020617;
+            padding: 20px;
+            transition: left 0.4s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            border-right: 1px solid #334155;
+        }
+
+        .light .sidebar {
+            background: #f1f5f9;
+            color: #020617;
+        }
+
+        .sidebar.active {
+            left: 0;
+            box-shadow: 5px 0 20px rgba(56, 189, 248, 0.2);
+            animation: sidebarGlow 2s infinite alternate;
+        }
+
+        @keyframes sidebarGlow {
+            0% { box-shadow: 5px 0 20px rgba(56, 189, 248, 0.2); }
+            100% { box-shadow: 5px 0 30px rgba(56, 189, 248, 0.4); }
+        }
+
+        .close {
+            float: right;
+            font-size: 22px;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        .profile {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #38bdf8;
+        }
+
+        .profile h2 {
+            margin-top: 10px;
+            color: #38bdf8;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            perspective: 1000px;
+        }
+
+        .sidebar.active .profile h2 {
+            transform: rotateX(10deg) rotateY(10deg);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .menu-section {
+            margin-top: 25px;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+        }
+
+        .light .menu-section {
+            border-top-color: #cbd5e1;
+        }
+
+        .menu-section h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .menu-section a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+            font-size: 17px;
+            padding: 8px 0;
+        }
+
+        .menu-section a:hover {
+            color: #38bdf8;
+        }
+
+        .resume {
+            margin-top: 10px;
+            background: #38bdf8;
+            padding: 10px;
+            border-radius: 6px;
+            color: black;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .light .section-card {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .section h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* About */
+        .about {
+            text-align: center;
+        }
+
+        .about img {
+            width: 180px;
+            height: 220px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid #38bdf8;
+            margin: 15px 0;
+        }
+
+        /* Item Cards for Education, Experience, Internships */
+        .item {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-left: 4px solid #38bdf8;
+        }
+
+        .light .item {
+            background: #f8fafc;
+        }
+
+        .item:hover {
+            transform: translateY(-2px);
+        }
+
+        .item:active {
+            transform: scale(0.98);
+        }
+
+        .desc, .exp-desc, .intern-desc {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #020617;
+            border-radius: 6px;
+            border-left: 4px solid #38bdf8;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .light .desc, .light .exp-desc, .light .intern-desc {
+            background: #e2e8f0;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .view-btn {
+            background: #38bdf8;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .view-btn:hover {
+            background: #0ea5e9;
+        }
+
+        /* Projects */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .light .project {
+            background: #f8fafc;
+        }
+
+        .project:hover {
+            transform: scale(1.01);
+        }
+
+        .project img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 15px;
+        }
+
+        .project h3 {
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+
+        .light .project h3 {
+            color: #1e293b;
+        }
+
+        .github {
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 18px;
+            margin-left: 8px;
+        }
+
+        .github:hover {
+            color: #7dd3fc;
+        }
+
+        /* Internships & Certifications */
+        .internship, .cert-card {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            color: white;
+            border-left: 4px solid #38bdf8;
+        }
+
+        .light .internship, .light .cert-card {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .internship:hover, .cert-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .intern-desc {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: #0f172a;
+            border-radius: 6px;
+            border-left: 4px solid #38bdf8;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .light .intern-desc {
+            background: #e2e8f0;
+        }
+
+        .intern-desc.show {
+            display: block;
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .cert-card p {
+            font-size: 14px;
+            color: inherit;
+            margin: 0;
+        }
+
+        /* Skills */
+        .skill-category {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        .light .skill-category {
+            background: #f8fafc;
+        }
+
+        .skill-category h3 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill {
+            margin: 15px 0;
+        }
+
+        .bar {
+            height: 8px;
+            background: #334155;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .light .bar {
+            background: #e2e8f0;
+        }
+
+        .fill {
+            height: 8px;
+            background: #38bdf8;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            text-align: center;
+        }
+
+        .gallery-btn {
+            background: #38bdf8;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: #0ea5e9;
+        }
+
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .gallery-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .gallery-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        .close-gallery {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Location with Map - Rectangular shape */
+        .location-section {
+            text-align: center;
+        }
+
+        .map-container {
+            background: #1e293b;
+            padding: 0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .light .map-container {
+            background: #f8fafc;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+        }
+
+        .location-address {
+            background: #334155;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .light .location-address {
+            background: #cbd5e1;
+            color: #1e293b;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .light .contact-form {
+            background: #f8fafc;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .contact-form label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #38bdf8;
+        }
+
+        .contact-form .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .contact-form .input-group i {
+            position: absolute;
+            left: 12px;
+            top: 38px;
+            color: #38bdf8;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+        }
+
+        .light .contact-form input, .light .contact-form textarea {
+            background: #f1f5f9;
+            color: #1e293b;
+            border-color: #cbd5e1;
+        }
+
+        .contact-form button {
+            margin-top: 15px;
+            background: #38bdf8;
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .contact-form button:hover {
+            background: #0ea5e9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020617;
+        }
+
+        .light footer {
+            background: #f1f5f9;
+            color: #020617;
+        }
+
+        /* Certificate button in intern-desc */
+        .cert-link {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .cert-link:hover {
+            background: #059669;
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-[#121212] text-white overflow-hidden">
+    <header>
+        <i class="fa fa-bars menu-icon menu" onclick="openMenu()"></i>
+        <div>Maroju Karthik</div>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </header>
 
-<div class="flex mk-screen">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <i class="fa fa-xmark close" onclick="closeMenu()"></i>
+        <div class="profile">
+            <img src="https://i.ibb.co/fV6MQdhL/63f58efa9e9bee85ee4e12a05a71546419f31ef51830f20781f6e67f45263c97.jpg" alt="Maroju Karthik">
+            <h2>Karthik Maroju</h2>
+        </div>
+        <div class="menu-section">
+            <h3>Portfolio</h3>
+            <a href="#about"><i class="fa fa-user"></i> About Me</a>
+            <a href="#education"><i class="fa fa-graduation-cap"></i> Education</a>
+            <a href="#experience"><i class="fa fa-briefcase"></i> Experience</a>
+            <a href="#projects"><i class="fa fa-code"></i> Projects</a>
+            <a href="#internships"><i class="fa fa-building"></i> Internships</a>
+            <a href="#certifications"><i class="fa fa-certificate"></i> Certifications</a>
+            <a href="#skills"><i class="fa fa-lightbulb"></i> Skills</a>
+            <a href="#gallery"><i class="fa fa-images"></i> Gallery</a>
+            <a href="#location"><i class="fa fa-map-marker-alt"></i> Location</a>
+            <a href="#contact"><i class="fa fa-envelope"></i> Contact</a>
+        </div>
+        <div class="menu-section">
+            <h3>My Resume</h3>
+            <a href="https://drive.google.com/file/d/1e1BwtHXHQRvz1jJs0ArCIXojM4gLfbpG/view?usp=drivesdk" class="resume" download>
+                <i class="fa fa-download"></i> Download Resume
+            </a>
+        </div>
+    </div>
 
-<!-- SIDEBAR -->
-<aside id="sidebar" class="w-72 bg-[#1e1e1e] flex flex-col border-r border-gray-800 md:static fixed h-full z-50 transition-transform duration-300 -translate-x-full md:translate-x-0">
+    <div class="container">
 
-<div class="p-8 border-b border-gray-700 text-center">
+        <!-- About -->
+        <div id="about" class="section section-card">
+            <h2><i class="fa fa-user"></i> About</h2>
+            <div class="about">
+                <img src="https://i.ibb.co/fV6MQdhL/63f58efa9e9bee85ee4e12a05a71546419f31ef51830f20781f6e67f45263c97.jpg" alt="Maroju Karthik">
+                <p>To leverage my programming skills and problem-solving abilities in a challenging role within a reputed organization, contributing to innovative projects while growing personally and professionally. I am a Computer Science student specializing in Artificial Intelligence and Machine Learning. I enjoy developing AI applications and solving real-world problems through programming.</p>
+            </div>
+        </div>
 
-<!-- REPLACE FILE_ID BELOW -->
-<src="<a href="https://ibb.co/DfZ7fVLS">< src="https://i.ibb.co/Qv46vbX1/1769855935249.jpg" alt="1769855935249" border="0"></a> 
+        <!-- Education -->
+        <div id="education" class="section section-card">
+            <h2><i class="fa fa-graduation-cap"></i> Education</h2>
+            <p style="margin-bottom: 20px;">My academic journey has equipped me with a strong foundation in AI, ML, and engineering principles, from high school excellence to specialized B.Tech studies.</p>
+            <div class="item" onclick="toggleDesc('edu1')">
+                <i class="fa fa-university"></i> B.Tech – CSE (AI & ML)<br>Avanthi Institute of Engineering & Technology (2023 – 2026)<br>CGPA: 7.50
+                <div id="edu1" class="desc">Pursued B.Tech in Computer Science Engineering with specialization in Artificial Intelligence and Machine Learning at Avanthi Institute of Engineering & Technology. The curriculum covered advanced topics including machine learning algorithms, deep learning frameworks like TensorFlow and PyTorch, natural language processing, computer vision, data mining, big data analytics, and ethical AI practices. Engaged in hands-on labs, capstone projects, and research on AI applications in healthcare and automation, achieving a CGPA of 7.50 through consistent academic performance and participation in tech fests and hackathons.
+                <img src="https://via.placeholder.com/400x200?text=B.Tech+AI+ML" alt="B.Tech Education" style="width:100%; margin-top:10px; border-radius:5px;"></div>
+            </div>
+            <div class="item" onclick="toggleDesc('edu2')">
+                <i class="fa fa-school"></i> Diploma – Electrical Engineering (EEE)<br>GBR Government Polytechnic (2019 – 2022)<br>CGPA: 7.2
+                <div id="edu2" class="desc">Completed a three-year Diploma in Electrical and Electronics Engineering at GBR Government Polytechnic College. Gained foundational knowledge in electrical circuits, power systems, control systems, digital electronics, and renewable energy sources. Practical training included wiring installations, motor controls, PLC programming, and substation operations. The program emphasized safety protocols and industrial standards, culminating in a final-year project on smart energy metering, resulting in a CGPA of 7.2.
+                <img src="https://via.placeholder.com/400x200?text=Diploma+EEE" alt="Diploma Education" style="width:100%; margin-top:10px; border-radius:5px;"></div>
+            </div>
+            <div class="item" onclick="toggleDesc('edu3')">
+                <i class="fa fa-book"></i> SSC – High School<br>Vijnana Bharathi High School (2019)<br>CGPA: 9.3
+                <div id="edu3" class="desc">Excelled in Secondary School Certificate (SSC) at Vijnana Bharathi High School with a CGPA of 9.3, demonstrating strong proficiency in core subjects like Mathematics, Physics, Chemistry, and English. Developed early interest in science and technology through school projects on basic electronics and environmental science. Participated in quizzes, debates, and science fairs, building teamwork and communication skills that laid the groundwork for higher education in engineering.
+                <img src="https://via.placeholder.com/400x200?text=High+School" alt="High School" style="width:100%; margin-top:10px; border-radius:5px;"></div>
+            </div>
+        </div>
 
-<h1 class="mt-6 text-2xl font-semibold">Maroju Karthik</h1>
-<p class="text-yellow-400">Software Engineer | AI & ML</p>
-<p class="text-xs text-gray-400 mt-1">B.Tech CSE (AI/ML)</p>
+        <!-- Experience -->
+        <div id="experience" class="section section-card">
+            <h2><i class="fa fa-briefcase"></i> Experience</h2>
+            <p style="margin-bottom: 20px;">Hands-on professional experience in electrical engineering and maintenance, complemented by industrial training for practical expertise.</p>
+            <div class="item" onclick="toggleDesc('exp1')">
+                ARC Property Solutions Pvt Ltd – Electrician (Hyderabad, 01/03/2023 – 01/08/2023)<br>Employee ID: ARC009808
+                <button class="view-btn" onclick="event.stopPropagation(); toggleDesc('exp1')">View Experience</button>
+                <button class="view-btn" onclick="window.open('https://drive.google.com/file/d/1iTKSH-lG7qPX9k9C-TD_ACz2T8WzmYA_/view?usp=drivesdk')">View Certificate</button>
+                <div id="exp1" class="exp-desc">As an Electrician at ARC Property Solutions Pvt. Ltd., handled electrical maintenance and service responsibilities in residential and commercial properties. Performed troubleshooting of faults, new wiring installations, panel upgrades, and preventive maintenance to ensure uninterrupted power supply and compliance with safety regulations. Additionally, completed a 5-month industrial training in Electrical and Electronics Engineering (EEE) at APEPDCL Vizianagaram, covering operation, office administration, and fieldwork. Acquired practical skills in substation operations, transmission lines, metering systems, and consumer grievance handling, enhancing technical expertise and on-site problem-solving abilities.
+                <img src="https://via.placeholder.com/400x200?text=ARC+Experience" alt="Experience" style="width:100%; margin-top:10px; border-radius:5px;"></div>
+            </div>
+        </div>
 
-</div>
+        <!-- Projects -->
+        <div id="projects" class="section section-card">
+            <h2><i class="fa fa-code"></i> Projects</h2>
+            <p style="margin-bottom: 20px;">Innovative AI and ML projects showcasing practical application of skills in object detection, chatbots, and visual QA.</p>
+            <div class="projects">
+                <div class="project">
+                    <img src="https://labelyourdata.com/cms/wp-content/uploads/2025/02/bg_yolo-object-detection_1.jpg" alt="Object Detection with YOLO">
+                    <div class="project-content">
+                        <h3>Object Detection with YOLO</h3>
+                        <button class="view-btn" onclick="toggleDesc('p1')">View</button>
+                        <a href="https://github.com/karthikmaroju/yolo-object-detection" class="github"><i class="fa-brands fa-github"></i></a>
+                        <div id="p1" class="desc">I'm using Roboflow with a pretrained YOLOV5 model from Universe to detect objects—one of the best models for object detection. The project involves dataset annotation, model fine-tuning for custom classes like vehicles and pedestrians, real-time inference on video streams using OpenCV, and performance evaluation with mAP metrics. Deployed as a web app for security surveillance applications. Source code: <a href="https://github.com/karthikmaroju/yolo-object-detection" class="github">GitHub Repo</a>.</div>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="https://cdn-ilebkoa.nitrocdn.com/UvolclzqoARorLjwgLvbJsYHmtjRMZgk/assets/images/optimized/rev-26123c0/www.floatchat.ai/wp-content/uploads/2023/05/Automate-Your-Business-Operations-And-Improve-Customer-Support-With-Telegram-Bots-1.png" alt="Telegram ChatBot">
+                    <div class="project-content">
+                        <h3>Telegram ChatBot</h3>
+                        <button class="view-btn" onclick="toggleDesc('p2')">View</button>
+                        <a href="https://github.com/karthikmaroju/telegram-gemini-bot" class="github"><i class="fa-brands fa-github"></i></a>
+                        <div id="p2" class="desc">Created a Telegram bot using the Gemini API that answers general questions and acts as a friendly companion for entertainment. Integrated natural language understanding for multi-turn conversations, image recognition, and fun quizzes. Built with python-telegram-bot library, handled user authentication, and deployed on Heroku for 24/7 availability. Features include sentiment analysis and personalized recommendations. Source code: <a href="https://github.com/karthikmaroju/telegram-gemini-bot" class="github">GitHub Repo</a>.</div>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="https://blog.roboflow.com/content/images/2024/04/image-181.webp" alt="Visual Question Answering Model">
+                    <div class="project-content">
+                        <h3>Visual Question and Answering Model</h3>
+                        <button class="view-btn" onclick="toggleDesc('p3')">View</button>
+                        <a href="https://github.com/karthikmaroju/visual-qa-model" class="github"><i class="fa-brands fa-github"></i></a>
+                        <div id="p3" class="desc">Developed a model that takes photos and question as input and provides answers based on the images, capable of handling basic visual queries. Utilized BLIP or ViLBERT architecture for multimodal fusion, trained on VQA datasets with fine-tuning on custom image-question pairs. Achieved accuracy in scene understanding, object localization, and attribute recognition. Integrated with Streamlit for interactive demo. Source code: <a href="https://github.com/karthikmaroju/visual-qa-model" class="github">GitHub Repo</a>.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="flex-1 p-8 overflow-y-auto space-y-8">
+        <!-- Internships -->
+        <div id="internships" class="section section-card">
+            <h2><i class="fa fa-building"></i> Internships</h2>
+            <p style="margin-bottom: 20px;">Diverse internships in AI, ML, and cybersecurity, providing hands-on experience in cutting-edge technologies.</p>
+            <div class="internship" onclick="toggleIntern('int1')">
+                AIMER Society – Artificial Intelligence Internship (AI & ML)
+                <img src="https://via.placeholder.com/400x200?text=AIMER+Internship" alt="AIMER Internship" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int1" class="intern-desc">Artificial Intelligence Intern – AIMER Society. Completed an 8-week (120 hours) short-term internship in Artificial Intelligence, gaining hands-on experience in AI fundamentals, data analysis basics, and introductory machine learning concepts through practical assignments and guided projects. Explored supervised/unsupervised learning, neural networks, and tools like Scikit-learn and Keras. <a href="cert-aimer.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+            <div class="internship" onclick="toggleIntern('int2')">
+                CodSoft – Artificial Intelligence Internship
+                <img src="https://via.placeholder.com/400x200?text=CodSoft+Internship" alt="CodSoft Internship" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int2" class="intern-desc">Artificial Intelligence Intern – CodSoft. Completed a 4-week virtual internship in Artificial Intelligence, gaining hands-on experience with AI fundamentals and applying concepts through practical tasks and project-based learning. Covered neural networks, computer vision basics, and ethical AI, building a sentiment analysis tool. <a href="cert-codsoft.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+            <div class="internship" onclick="toggleIntern('int3')">
+                AICTE EduSkills – Cybersecurity Internship
+                <img src="https://via.placeholder.com/400x200?text=AICTE+Cybersecurity" alt="AICTE Cybersecurity" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int3" class="intern-desc">Cybersecurity Virtual Intern – AICTE EduSkills. Completed a 10-week virtual internship in Cybersecurity, gaining foundational knowledge of network security, cyber threats, and security best practices. Learned encryption, firewalls, vulnerability assessment, and incident response through simulations. <a href="cert-aicte-cyber1.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+            <div class="internship" onclick="toggleIntern('int4')">
+                SmartBridge – AI & ML Internship (APSCHE - AI&ML, Python)
+                <img src="https://via.placeholder.com/400x200?text=SmartBridge+Internship" alt="SmartBridge Internship" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int4" class="intern-desc">Artificial Intelligence & Machine Learning Intern – SmartBridge. Completed a 2-month internship in Artificial Intelligence and Machine Learning, gaining practical exposure to AI fundamentals, basic machine learning techniques, and real-world applications through structured learning. Implemented regression models and clustering algorithms in Python. <a href="cert-smartbridge.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+            <div class="internship" onclick="toggleIntern('int5')">
+                AICTE EduSkills (Palo Alto Networks) – Cybersecurity Virtual Internship
+                <img src="https://via.placeholder.com/400x200?text=Palo+Alto+Cybersecurity" alt="Palo Alto Internship" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int5" class="intern-desc">Cybersecurity Virtual Intern – AICTE EduSkills (Palo Alto Networks). Completed a 10-week virtual internship in Cybersecurity, gaining practical knowledge of network security fundamentals, cyber threats, and security best practices through structured training. Focused on threat detection, SIEM tools, and compliance standards. <a href="cert-aicte-cyber2.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+            <div class="internship" onclick="toggleIntern('int6')">
+                Growfinix – Artificial Intelligence Internship
+                <img src="https://via.placeholder.com/400x200?text=Growfinix+Internship" alt="Growfinix Internship" style="width:100%; margin-top:10px; border-radius:5px;">
+                <div id="int6" class="intern-desc">Artificial Intelligence Intern – Growfinix. Completed a 2-month virtual internship in Artificial Intelligence, gaining practical exposure to AI fundamentals, basic model concepts, and real-world applications through structured tasks. Developed a recommendation system using collaborative filtering. <a href="cert-growfinix.pdf" target="_blank" class="cert-link"><i class="fa fa-certificate"></i> View Certificate</a></div>
+            </div>
+        </div>
 
-<div>
-<p class="uppercase text-xs text-gray-400 mb-4">Contact</p>
-<p class="text-sm">karthikmaroju479@gmail.com</p>
-<p class="text-sm mt-2">+91 9666387322</p>
-<p class="text-sm mt-2">Vizianagaram, Andhra Pradesh</p>
-</div>
+        <!-- Certifications -->
+        <div id="certifications" class="section section-card">
+            <h2><i class="fa fa-certificate"></i> Certifications</h2>
+            <p style="margin-bottom: 20px;">Recognized certifications in Python, AI/ML, and data science, validating core technical competencies.</p>
+            <div class="certifications">
+                <div class="cert-card">
+                    <img src="https://media.licdn.com/dms/image/v2/C5612AQGG-vWzBfbk0g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1592671998663?e=2147483647&v=beta&t=QEnrrGBguntHTw6Dvd8auUD_BeiAv7MmOVD-jyB9vi0" alt="Python for Everybody">
+                    <p>Google - Coursera - Python: Fundamentals of Python programming and scripting.</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D22AQEFKGy2GoHCyg/feedshare-shrink_800/B4DZZhUwGrHwAk-/0/1745389559798?e=2147483647&v=beta&t=4tF0qAt1MoVVbnKFdvNvlHlroNhKsP1Rolyyv4UNkv8" alt="Microsoft AI&ML">
+                    <p>Microsoft - Coursera - AI&ML: Introduction to artificial intelligence and machine learning concepts.</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D5622AQG7S4JC2y2dAw/feedshare-shrink_800/B56ZVIivGLHQAg-/0/1740678820475?e=2147483647&v=beta&t=jlU2Edf9RwcyONXRkqRerLBdPKmYjzgd88aqeNjtcdg" alt="Linkedin Learning Python DSA">
+                    <p>Linkedin Learning - Python with DSA, Generative AI: Data structures in Python and generative AI basics.</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://imgv2-1-f.scribdassets.com/img/document/720051235/original/0e3da5febd/1?v=1" alt="IBM Python Data Science">
+                    <p>IBM - Python For Data Science, AI: Python for data analysis and AI applications.</p>
+                </div>
+                <div class="cert-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E22AQEMRw0BNzuGBA/feedshare-shrink_800/feedshare-shrink_800/0/1722924225322?e=2147483647&v=beta&t=22EPdufADnPramADH2FOdqyuH2LWKmmpnsHf9-QrAmQ" alt="Cisco Python Essentials">
+                    <p>Cisco - Python Essential1, Python Essential 2: Essential Python programming skills for networking.</p>
+                </div>
+            </div>
+        </div>
 
-<div>
-<p class="uppercase text-xs text-gray-400 mb-4">Connect</p>
+        <!-- Skills -->
+        <div id="skills" class="section section-card">
+            <h2><i class="fa fa-lightbulb"></i> Skills</h2>
+            <p style="margin-bottom: 20px;">Core technical skills in programming, web development, and AI/ML, with proficiency levels indicated.</p>
+            <div class="skill-category">
+                <h3><i class="fa fa-desktop"></i> Frontend</h3>
+                <div class="skill">HTML <div class="bar"><div class="fill" style="width:90%"></div></div></div>
+                <div class="skill">CSS <div class="bar"><div class="fill" style="width:85%"></div></div></div>
+                <div class="skill">JavaScript <div class="bar"><div class="fill" style="width:75%"></div></div></div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa fa-server"></i> Backend</h3>
+                <div class="skill">Python <div class="bar"><div class="fill" style="width:80%"></div></div></div>
+                <div class="skill">C Language <div class="bar"><div class="fill" style="width:70%"></div></div></div>
+                <div class="skill">AI/ML <div class="bar"><div class="fill" style="width:75%"></div></div></div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa fa-database"></i> Database</h3>
+                <div class="skill">MySQL <div class="bar"><div class="fill" style="width:60%"></div></div></div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa fa-box"></i> Packages</h3>
+                <div class="skill">NumPy <div class="bar"><div class="fill" style="width:70%"></div></div></div>
+                <div class="skill">Pandas <div class="bar"><div class="fill" style="width:65%"></div></div></div>
+            </div>
+        </div>
 
-<div class="flex gap-4">
+        <!-- Gallery -->
+        <div id="gallery" class="section section-card gallery-section">
+            <h2><i class="fa fa-images"></i> Gallery</h2>
+            <p style="margin-bottom: 20px;">Personal gallery showcasing moments from my journey in tech and life.</p>
+            <button class="gallery-btn" onclick="openDocument()"><i class="fa fa-file-pdf"></i> View Document</button>
+        </div>
 
-<a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="social-icon">
-<i class="fa-brands fa-github"></i>
-</a>
+        <!-- Location -->
+        <div id="location" class="section section-card location-section">
+            <h2><i class="fa fa-map-marker-alt"></i> Location</h2>
+            <div class="location-address">
+                <p>385, Phoolbaugh colony, Vizianagaram, Andhra Pradesh, India - 535002</p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.5!2d83.408!3d18.115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a395c!2sPhool+Bagh%2C+Vizianagaram%2C+Andhra+Pradesh+535002!5e0!3m2!1sen!2sin!4v9999999999999!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
 
-<a href="https://linkedin.com/in/karthik-maroju" target="_blank" class="social-icon">
-<i class="fa-brands fa-linkedin"></i>
-</a>
+        <!-- Contact -->
+        <div id="contact" class="section section-card">
+            <h2><i class="fa fa-envelope"></i> Contact</h2>
+            <div class="contact-form">
+                <h3>Send me a message</h3>
+                <form action="https://formspree.io/f/your-form-id" method="POST">
+                    <div class="input-group">
+                        <label for="name">Name</label>
+                        <i class="fa fa-user"></i>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <i class="fa fa-envelope"></i>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="message">Message</label>
+                        <i class="fa fa-comment"></i>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit"><i class="fa fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+        </div>
 
-<a href="https://wa.me/qr/W4SK67TCSW4ZG1" target="_blank" class="social-icon">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
+    </div>
 
-<a href="https://www.instagram.com/mr.karthik1_4_3_?igsh=MW4ydHowM2pycnNneg==" target="_blank" class="social-icon">
-<i class="fa-brands fa-instagram"></i>
-</a>
+    <footer>
+        Created by Maroju Karthik
+    </footer>
 
-</div>
-</div>
+    <script>
+        function openMenu() {
+            document.getElementById("sidebar").classList.add("active");
+        }
 
-<div>
-<a href="https://drive.google.com/file/d/1e1BwtHXHQRvz1jJs0ArCIXojM4gLfbpG/view?usp=drivesdk" download
-class="w-full bg-yellow-400 text-black font-semibold py-3 rounded-2xl flex items-center justify-center gap-2">
-<i class="fa-solid fa-download"></i> Download Resume
-</a>
-</div>
+        function closeMenu() {
+            document.getElementById("sidebar").classList.remove("active");
+        }
 
-</div>
+        function toggleTheme() {
+            document.body.classList.toggle("light");
+        }
 
-<div class="p-6 text-center text-xs text-gray-500 border-t border-gray-800">
-© 2026 Maroju Karthik...❤️
-</div>
+        function toggleDesc(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle("show");
+        }
 
-</aside>
+        function toggleIntern(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle("show");
+        }
 
-<!-- MAIN -->
-<div class="flex-1 flex flex-col">
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.1 });
 
-<header class="h-16 bg-[#1e1e1e] border-b border-gray-800 px-6 flex items-center justify-between">
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
 
-<button id="mobile-menu-btn" class="md:hidden text-2xl">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-<nav class="flex gap-8 text-sm">
-<a data-tab="about" class="tab tab-active cursor-pointer">About</a>
-<a data-tab="resume" class="tab cursor-pointer">Resume</a>
-<a data-tab="portfolio" class="tab cursor-pointer">Portfolio</a>
-<a data-tab="contact" class="tab cursor-pointer">Contact</a>
-</nav>
-
-</header>
-
-<main class="flex-1 overflow-auto p-10">
-
-<div id="about-section" class="section">
-<h1 class="text-4xl font-bold mb-6">About Me</h1>
-<p class="text-gray-300 text-lg leading-relaxed">
-AI & ML focused Software Engineer with hands-on experience in YOLOv5 Object Detection, Telegram AI ChatBot using Gemini API, and Visual Question Answering systems.
-</p>
-</div>
-
-<div id="resume-section" class="section hidden">
-<h1 class="text-4xl font-bold mb-6">Education</h1>
-
-<p class="text-yellow-400">2023 – 2026</p>
-<p>B.Tech CSE (AI/ML) – Avanthi Institute</p>
-
-<p class="text-yellow-400 mt-6">2019 – 2022</p>
-<p>Diploma EEE – GBR Polytechnic</p>
-</div>
-
-<div id="portfolio-section" class="section hidden">
-<h1 class="text-4xl font-bold mb-6">Projects</h1>
-
-<ul class="space-y-4">
-<li>Object Detection using YOLOv5</li>
-<li>Telegram AI ChatBot (Gemini API)</li>
-<li>Visual Question Answering Model</li>
-</ul>
-</div>
-
-<div id="contact-section" class="section hidden">
-<h1 class="text-4xl font-bold mb-6">Contact Me</h1>
-<p>Email: karthikmaroju479@gmail.com</p>
-<p>Phone: +91 9666387322</p>
-</div>
-
-</main>
-</div>
-</div>
-
-<script>
-document.querySelectorAll('.tab').forEach(tab=>{
-tab.addEventListener('click',()=>{
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('tab-active'));
-tab.classList.add('tab-active');
-document.querySelectorAll('.section').forEach(sec=>sec.classList.add('hidden'));
-document.getElementById(tab.getAttribute('data-tab')+'-section').classList.remove('hidden');
-});
-});
-
-const mobileBtn=document.getElementById('mobile-menu-btn');
-const sidebar=document.getElementById('sidebar');
-mobileBtn.addEventListener('click',()=>{
-sidebar.classList.toggle('-translate-x-full');
-});
-</script>
+        // Gallery function - open document (resume PDF)
+        function openDocument() {
+            window.open('https://drive.google.com/file/d/1e1BwtHXHQRvz1jJs0ArCIXojM4gLfbpG/view?usp=drivesdk', '_blank');
+        }
+    </script>
 
 </body>
 </html>
